@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Progress</title>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js'></script>
+-->
+<script src='../js/jquery.min.js'></script>
+<script src='../js/d3.min.js'></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap.min.css">
+
+<!-- Font Awesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+.vis{
+	shape-rendering: crispEdges;
+}
+.line{
+	stroke:#999;
+	fill:none;
+	shape-rendering: crispEdges;
+}
+.axis{
+	shape-rendering: crispEdges;
+  /*font-size: 12px;*/
+}
+.progressStudent{}
+.progressClass{}
+.videoStudent{}
+.videoClass{}
+</style>
+
+</head>
+
+<body>
+<div class='container'>
+<h1><i class='fa fa-line-chart'></i> Student progress</h1>
+<hr />
+<div id='chart'></div>
+
+
+<script>
+var w = 960, h = 320;
+
+var mnc = new Array();
+mnc.push("#759353");
+mnc.push("#a4b88e");
+mnc.push("#1F77B4");
+mnc.push("#6ba5ce");
+mnc.push("#e84e1c");
+mnc.push("#f08a69");
+mnc.push("#be1721");
+mnc.push("#d4666d");
+mnc.push("#99958b");
+mnc.push("#eae4d4");
+
+//d3.scale.category10().range(mnc);//set our palette
+var color = d3.scale.ordinal().range(mnc);
+//var color = d3.scale.category10();
+
+var data=[];
+for (var i=0;i<8;i++) {
+	data.push({'problems':Math.round(Math.random()*99),'videos':Math.round(Math.random()*99)});
+}
+
+console.log(data);
+
+var svg = d3.select("#chart").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("class", "vis");
+    //.append("g")
+/*
+var xScale = d3.scale.linear().domain([1,8]).range([50,750]);
+var xAxis = d3.svg.axis()
+	.scale(xScale)
+	.orient("bottom")
+	.tickValues([1,2,3,4,5,6,7,8])
+	.tickFormat(function(d,i){
+		return "Week " + (i+1);
+
+
+svg.append("g")
+	.attr("class", "axis")
+	.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+	.attr("transform", "translate(0,40)")
+	.call(xAxis);
+	});
+*/
+
+// new legend
+var legends = svg.append("g");
+legends.selectAll("text")
+	.data([1,2,3,4,5,6,7,8])
+	.enter()
+	.append("text")
+	.attr('x',function(d,i){return i*100 + 85;})
+	.attr('y',10)
+	.text(function(d,i){
+		return "Week "+(i+1);
+	});
+
+
+legends.selectAll("line")
+	.data([1,2,3,4,5,6,7,8,9])
+	.enter()
+	.append("line")
+	.attr("class", "line")
+	.attr("x1", function(d,i){return i*100+80;})
+	.attr("y1", 0)
+	.attr("x2", function(d,i){return i*100+80;})
+	.attr("y2", 70);
+
+
+// Draw the line (horizontal separator)
+svg.append("line")
+	.attr("class", "line")
+	//.attr("fill", "red")
+	.attr("x1", 0)
+	.attr("y1", 45)
+	.attr("x2", 880)
+	.attr("y2", 45);
+
+// Title "problems"
+svg.append("text")
+	.attr("x",0)
+	.attr("y",30)
+	.text("Problems");
+
+// Title "video"
+svg.append("text")
+	.attr("x",0)
+	.attr("y",60)
+	.text("Videos");
+
+
+
+
+// progress Student
+var bars1 = svg.selectAll("rect.progressStudent")
+	.data(data)
+	.enter()
+	.append("rect")
+	.attr('class',"progressStudent")
+	.attr('x',function(d,i){return i*100+80+1;})
+	.attr('y',function(d,i){return 20;})
+	.attr("width",0)
+	.attr("height",10)
+	.attr('fill', color(0));
+
+//update
+bars1.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('width',function(d,i){
+		return d.problems;
+	});
+
+// progress Class
+var bars2 = svg.selectAll("rect.progressClass")
+	.data(data)
+	.enter()
+	.append("rect")
+	.attr("class","progressClass")
+	.attr('x',function(d,i){return i*100+80+1;})
+	.attr('y',function(d,i){return 30;})
+	.attr("width",0)
+	.attr("height",10)
+	.attr('fill', color(1));
+
+//update
+bars2.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('width',function(d,i){
+		return Math.random()*99;
+	})
+	.style("opacity", 0.5);
+
+
+
+
+// video Student
+var bars3 = svg.selectAll("rect.videoStudent")
+	.data(data)
+	.enter()
+	.append("rect")
+	.attr('class',"videoStudent")
+	.attr('x',function(d,i){return i*100+80+1;})
+	.attr('y',function(d,i){return 50;})
+	.attr("width",0)
+	.attr("height",10)
+	.attr('fill', color(2));
+
+//update
+bars3.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('width',function(d,i){
+		return d.videos;
+	});
+
+
+// video Class
+var bars4 = svg.selectAll("rect.videoClass")
+	.data(data)
+	.enter()
+	.append("rect")
+	.attr('class',"videoClass")
+	.attr('x',function(d,i){return i*100+80+1;})
+	.attr('y',function(d,i){return 60;})
+	.attr("width",0)
+	.attr("height",10)
+	.attr('fill', color(3));
+
+//update
+bars4.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('width',function(d,i){
+		return Math.random()*99;
+	})
+	.style("opacity", 0.25);
+
+
+
+
+
+
+
+
+$(function(){
+	console.log("ready");
+});
+
+</script>

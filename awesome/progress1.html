@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Progress</title>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js'></script>
+-->
+<script src='../js/jquery.min.js'></script>
+<script src='../js/d3.min.js'></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="bootstrap.min.css">
+
+<!-- Font awesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+.vis{
+	shape-rendering: crispEdges;
+}
+.line{stroke:black;fill:none;shape-rendering: crispEdges;}
+.axis{
+	shape-rendering: crispEdges;
+  /*font-size: 12px;*/
+}
+</style>
+
+</head>
+
+<body>
+<div class='container'>
+<h1>Student progress</h1>
+<hr />
+<div id='chart'></div>
+
+
+<script>
+var w = 800, h = 320;      
+var data=[];
+data.push(Math.round(Math.random()*100));
+data.push(Math.round(Math.random()*100));
+console.log(data);
+
+var svg = d3.select("#chart").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("class", "vis");
+    //.append("g")
+
+var xScale = d3.scale.linear().domain([0,100]).range([50,750]);
+var xAxis = d3.svg.axis()
+	.scale(xScale)
+	.orient("bottom")
+	.tickValues([0, 25, 50, 75, 100])
+	.tickFormat(function(d){
+		return d + " %";
+	});
+  
+svg.append("g")
+	.attr("class", "axis")
+	.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+	.attr("transform", "translate(0,40)")
+	.call(xAxis);
+
+
+//final flag
+svg.append("text")
+	.attr("x", xScale(100)+32)
+	.attr("y", 20)
+	.attr('text-anchor', 'middle')
+	.attr('dominant-baseline', 'central')
+	.attr('font-family', 'FontAwesome')
+	.attr('font-size', '30px')
+	.text("\uf11e");//fa-flag-checkered
+
+/*
+var bar=svg.selectAll("rect.progress").data(data).enter()
+	.append("rect")
+	.attr("class","progress")
+	.attr("x", xScale(0))
+	.attr("y",function(d,i){return 30+i*2})
+	.attr("width",function(d,i){
+		return xScale(100);
+	})
+	.attr("height",2)
+	.attr("fill",function(d,i){
+		if(i==0)return '#c00';
+		return '#999';
+	});
+*/
+
+var txt = svg.selectAll("text.label")
+	.data(data)
+	.enter()
+	.append("text")
+	.attr('x',function(d,i){
+		return xScale(0);
+	})
+	.attr('y',function(d,i){
+		return 20;
+	})
+	.attr('text-anchor', 'middle')
+	.attr('dominant-baseline', 'central')
+	.attr('font-family', 'FontAwesome')
+	.attr('font-size', '30px')
+	.attr('fill', function(d,i){
+		if(i==0)return '#c00';
+		return '#999';
+	})
+	.style("opacity", 0.5)
+	.text(function(d,i){
+		if(i==0)return "\uf007";// user
+		if(i==1)return "\uf0c0";// group
+		return "\uf004";// heart
+	});
+
+//update
+txt
+	.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('x',function(d,i){
+		return xScale(d);
+	})
+	.style("opacity", 1)
+	//.attr('fill', '#999')
+	//.attr('font-size', 128+'px')
+	;
+
+
+
+
+
+
+
+$(function(){
+	console.log("ready");
+});
+
+</script>

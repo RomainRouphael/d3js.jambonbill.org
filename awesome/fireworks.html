@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Font awesome and d3</title>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js'></script>
+-->
+<script src='../js/jquery.min.js'></script>
+<script src='../js/d3.min.js'></script>
+<script src='font-awesome-unicode-map.js'></script>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+.vis{
+	fill:#fc0;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>D3 Awesome</h1>
+
+<div id='chart'></div>
+
+
+<script>
+var w = 960, h = 400;      
+var data=[];
+
+//ural_volga.mod
+//http://www.cyrilpereira.com/modplayer/#ural_volga.mod
+//
+// http://jsspeccy.zxdemo.org/jsmodplayer/
+
+// http://stackoverflow.com/questions/463786/what-is-an-easy-way-to-call-asc-and-chr-in-javascript-for-unicode-values
+
+
+var svg = d3.select("#chart").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("class", "vis");
+    //.append("g")
+
+var symbols=[];
+symbols.push('\uf069');//*
+symbols.push('\uf1e2');// fa-bomb [&#xf1e2;]
+symbols.push('\uf111');// fa-circle [&#xf111;]
+symbols.push('\uf10c');// fa-circle-o [&#xf10c;]
+symbols.push('\uf1db');// fa-circle-thin [&#xf1db;]
+//symbols.push('\uf013');// fa-cog [&#xf013;]
+symbols.push('\uf192');// fa-dot-circle-o [&#xf192;]
+//symbols.push('\uf1d1');// fa-empire [&#xf1d1;]
+//symbols.push('\uf013');// fa-gear (alias) [&#xf013;]
+symbols.push('\uf004');// fa-heart [&#xf004;]
+symbols.push('\uf08a');// fa-heart-o [&#xf08a;]
+//symbols.push('\uf185');// fa-sun-o [&#xf185;]
+//symbols.push('\uf1e9');// fa-yelp [&#xf1e9;]
+symbols.push('\uf140');// fa-bullseye [&#xf140;]
+//symbols.push('\uf0a3');// fa-certificate [&#xf0a3;]
+symbols.push('\uf198');// fa-slack [&#xf198;]
+symbols.push('\uf096');// fa-square-o [&#xf096;]
+symbols.push('\uf0c8');// fa-square [&#xf0c8;]
+symbols.push('\uf005');// fa-star [&#xf005;]
+symbols.push('\uf006');// fa-star-o [&#xf006;]
+
+
+/*
+svg.append('text')
+    .attr('y', h/2)
+    .attr('font-family', 'FontAwesome')
+    .attr('font-size', function(d) { return '16em'} )
+    .text(function(d) { 
+    	return '\uf125'; 
+    	 
+    }); 
+
+svg.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'central')
+    .attr('font-family', 'FontAwesome')
+    .attr('font-size', '32px')
+    .attr('x', '100')
+    .attr('y', '100')
+    .attr('fill', '#c00')
+    .text(function(d) { return FONT_AWESOME.archive; });
+*/
+
+//http://bl.ocks.org/mbostock/9539958
+
+function update()
+{
+	//console.log('update()', data);
+	
+	var txt = svg.selectAll("text.label").data(Array(Math.round(Math.random()*8)+4));
+ 	//.data( data.filter(function(d){return d>0;}) );
+
+ 	var startx=Math.random()*w;
+ 	//var starty=Math.random()*h;
+ 	var starty=h;
+
+ 	//enter
+ 	txt.enter().append("text")
+ 		.attr('x',startx)
+ 		.attr('y',starty)
+ 		.attr('text-anchor', 'middle')
+    	.attr('dominant-baseline', 'central')
+ 		.attr('font-family', 'FontAwesome')
+		.attr('font-size', '8px')
+		.attr('fill', '#000')
+		.style("opacity", 0.5)
+		.text(function(d,i){
+			//return  Math.round(d*100);
+			return symbols[Math.round(Math.random()*symbols.length)];
+		});
+	
+	//update
+	//var rotate = d3.svg.transform().rotate(-90);
+			
+	txt	
+		.transition(100)
+		.attr('font-size', '62px')
+		.attr('fill', '#f00')
+		.attr("x", function(d,i){ return Math.random()*w; })
+		.attr("y", function(d,i){ return Math.random()*h; })
+		.style("opacity", 1)
+		.transition(1000)
+			.delay(function(d,i){return i*100})
+			.attr('font-size', '128px')
+			.attr('fill', '#fc0')
+			//.attr('transform', "rotate(90)")
+			.attr('transform', "translate(0, 50)")
+			.style("opacity", 0)
+			.remove();
+	//exit
+	/*
+	txt.exit()
+		.transition(500)
+		.attr("x", 0 )
+		.remove();
+	*/
+	/*
+	svg.insert("circle", "rect")
+      .attr("cx", w/2)
+      .attr("cy", h/2)
+      .attr("r", 1e-6)
+      .style("stroke", d3.hsl((i = (i + 1) % 360), 1, .5))
+      .style("stroke-opacity", 1)
+    .transition()
+      .duration(2000)
+      .ease(Math.sqrt)
+      .attr("r", 100)
+      .style("stroke-opacity", 1e-6)
+      .remove();
+	*/
+}
+
+$(function(){
+	console.log("ready");
+
+	setInterval('update()',500);
+});
+
+</script>

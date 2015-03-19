@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Progress</title>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js'></script>
+-->
+<script src='../js/jquery.min.js'></script>
+<script src='../js/d3.min.js'></script>
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+
+<!-- Font Awesome -->
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+.vis{
+	shape-rendering: crispEdges;
+}
+.line{stroke:black;fill:none;shape-rendering: crispEdges;}
+.axis{
+	shape-rendering: crispEdges;
+  /*font-size: 12px;*/
+}
+</style>
+
+</head>
+
+<body>
+<div class='container'>
+<h1>Student progress, by week</h1>
+
+<div id='chart'></div>
+
+
+<script>
+var w = 800, h = 320;
+
+var data=[];
+for (var i=0;i<8;i++) {
+	data.push({'problems':Math.round(Math.random()*100),'video':Math.round(Math.random()*100)});
+}
+
+console.log(data);
+
+var svg = d3.select("#chart").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("class", "vis");
+    //.append("g")
+
+var xScale = d3.scale.linear().domain([1,8]).range([50,750]);
+var xAxis = d3.svg.axis()
+	.scale(xScale)
+	.orient("bottom")
+	.tickValues([1,2,3,4,5,6,7,8])
+	.tickFormat(function(d,i){
+		return "Week " + (i+1);
+	});
+  
+svg.append("g")
+	.attr("class", "axis")
+	.style({ 'stroke': 'Black', 'fill': 'none', 'stroke-width': '1px'})
+	.attr("transform", "translate(0,40)")
+	.call(xAxis);
+/*
+svg.append("text")
+	.attr("x", xScale(100)+32)
+	.attr("y", 20)
+	.attr('text-anchor', 'middle')
+	.attr('dominant-baseline', 'central')
+	.attr('font-family', 'FontAwesome')
+	.attr('font-size', '30px')
+	.text("\uf11e");//fa-flag-checkered
+
+var txt = svg.selectAll("text.label")
+	.data(data);
+//var txt = svg.selectAll("text.label").data(Array(100));
+
+txt.enter()
+	.append("text")
+	.attr('x',function(d,i){
+		return xScale(0);
+	})
+	.attr('y',function(d,i){
+		return 20;
+	})
+	.attr('text-anchor', 'middle')
+	.attr('dominant-baseline', 'central')
+	.attr('font-family', 'FontAwesome')
+	.attr('font-size', '30px')
+	.attr('fill', function(d,i){
+		if(i==0)return '#c00';
+		return '#999';
+	})
+	.style("opacity", 0.5)
+	.text(function(d,i){
+		if(i==0)return "\uf007";// user
+		if(i==1)return "\uf0c0";// group
+		return "\uf004";// heart
+	});
+
+//update
+txt
+	.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('x',function(d,i){
+		return xScale(d);
+	})
+	.style("opacity", 1)
+	//.attr('fill', '#999')
+	//.attr('font-size', 128+'px')
+	;
+*/
+
+
+
+
+
+$(function(){
+	console.log("ready");
+});
+
+</script>

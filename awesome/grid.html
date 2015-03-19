@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Grid</title>
+<!--
+<script src='https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.3/d3.min.js'></script>
+-->
+<script src='../js/jquery.min.js'></script>
+<script src='../js/d3.min.js'></script>
+<script src='font-awesome-unicode-map.js'></script>
+
+<link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+<style>
+.vis{
+	fill:#fc0;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>Grid</h1>
+
+<div id='chart'></div>
+
+
+<script>
+var w = 640, h = 320;      
+var cellsize=64;
+var data=[];
+
+var svg = d3.select("#chart").append("svg:svg")
+    .attr("width", w)
+    .attr("height", h)
+    .attr("class", "vis");
+    //.append("g")
+
+var txt = svg.selectAll("text.label").data(Array(Math.round(w/cellsize)*Math.round(h/cellsize)));
+//var txt = svg.selectAll("text.label").data(Array(100));
+
+txt.enter()
+	.append("text")
+	.attr('x',function(d,i){
+		return i*cellsize%w+cellsize/2;
+	})
+	.attr('y',function(d,i){
+		return Math.floor(i/(w/cellsize))*cellsize+cellsize/2;
+	})
+	.attr('text-anchor', 'middle')
+	.attr('dominant-baseline', 'central')
+	.attr('font-family', 'FontAwesome')
+	.attr('font-size', cellsize+'px')
+	.attr('fill', '#999')
+	.style("opacity", 1)
+	.text(function(d,i){
+		//return  Math.round(d*100);
+		return "\uf005";//star
+	});
+
+//update
+txt
+	.transition()
+	.delay(function(d,i){return i*25;})
+	.attr('fill', 'red')
+	//.attr('font-size', 128+'px')
+	;
+
+
+/*
+svg.append('text')
+    .attr('y', h/2)
+    .attr('font-family', 'FontAwesome')
+    .attr('font-size', function(d) { return '16em'} )
+    .text(function(d) { 
+    	return '\uf125'; 
+    	 
+    }); 
+
+svg.append('text')
+    .attr('text-anchor', 'middle')
+    .attr('dominant-baseline', 'central')
+    .attr('font-family', 'FontAwesome')
+    .attr('font-size', '32px')
+    .attr('x', '100')
+    .attr('y', '100')
+    .attr('fill', '#c00')
+    .text(function(d) { return FONT_AWESOME.archive; });
+*/
+
+//http://bl.ocks.org/mbostock/9539958
+
+
+$(function(){
+	console.log("ready");
+});
+
+</script>
