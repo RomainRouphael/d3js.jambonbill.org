@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='js/d3.min.js'></script>
+  <title>d3 black</title>
+<style>
+body{
+  background-color: #333;
+  color:white;
+}
+svg{
+  background-color: black;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+Black
+<div class="container">
+<div id='chart'></div>
+
+
+<script type="text/javascript">
+var data=[];
+var width = 800,
+    height = 600;
+
+var color = d3.scale.category20c();
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+svg.append("circle")
+  .attr("fill", "white" )
+  .attr("cx", width/2 )
+  .attr("cy", height/2 )
+  .attr("r" , 100 )
+  
+  .transition(500)
+    .attr("fill", "black")
+    //.attr("cx", function(d,i){return width/10;})
+    //.attr("cy", function(d,i){return height/1;})
+    .attr("r" , 110 );
+  
+</script>
+</body>
+</html>

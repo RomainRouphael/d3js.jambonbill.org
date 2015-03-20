@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='js/d3.min.js'></script>
+  <title>d3 experiment</title>
+<style>
+body{
+  background-color: #999;
+  color:white;
+}
+svg{
+  background-color: black;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+Squares
+<div class="container">
+<div id='chart'></div>
+
+
+<script type="text/javascript">
+var data=[];
+var width = 800,
+    height = 600;
+
+var color = d3.scale.category20c();
+//var colors=
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+function update(){
+  svg.selectAll("rect").data(new Array(31))
+    .enter()
+    .append("rect")
+    .attr("fill",function(d,i){
+      if(i%2==0)return '#fff';
+      return '#000';
+      //return color(i);
+    })
+    .attr("x",function(d,i){
+      return i*10;
+    })
+    .attr("y",function(d,i){
+      return i*10;
+    })
+    .attr("width",function(d,i){
+      return height-i*20;
+    })
+    .attr("height",function(d,i){
+      return height-i*20;
+    })
+    
+    .transition(1500)
+    .delay(function(d,i){return i*10;})
+    .attr("x",function(d,i){
+      return i*10-10;
+    })
+    .attr("y",function(d,i){
+      return i*10-10;
+    })
+    .attr("width",function(d,i){
+      return height-i*20+20;
+    })
+    .attr("height",function(d,i){
+      return height-i*20+20;
+    }) 
+    ;
+    return true;  
+}
+  
+
+update();
+</script>
+</body>
+</html>

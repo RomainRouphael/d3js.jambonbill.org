@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='js/d3.min.js'></script>
+  <title>d3 experiment</title>
+<style>
+body{
+  background-color: #999;
+  color:white;
+}
+svg{
+  background-color: black;
+  color:white;
+}
+</style>
+</head>
+
+<body>
+Starfield 1 (2d)
+<div class="container">
+<div id='chart'></div>
+
+
+<script type="text/javascript">
+var data=[];
+var width = 800,
+    height = 600;
+
+var color = d3.scale.category20c();
+//var colors=
+
+var svg = d3.select("#chart").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+function update(){
+  
+  var data=[];
+  for(var i=0;i<32;i++){
+    data.push({'r':Math.round(Math.random()*3)+1,'x':Math.random()*width});
+  }
+  console.log(data);
+
+  var stars=svg.selectAll("circle").data(data)
+    .enter()
+    .append("circle")
+    .attr("fill",function(d,i){
+      return '#fff';
+      //return color(i);
+    })
+    .attr("cx",function(d,i){
+      return d.x;
+    })
+    .attr("cy",function(d,i){
+      return Math.random()*height;
+    })
+    .attr("r",function(d,i){
+      //console.log(d[1]);
+      return d.r;
+    });
+  
+
+  stars
+  .transition()
+    .delay(function(d,i){return i;})
+    .attr("cx",function(d,i){
+      return d.x+100;
+    })
+  .transition(1500)
+    .delay(function(d,i){return i;})
+    .attr("cx",function(d,i){
+      return 300+d.x;
+    })
+    //.attr("opacity",0)
+    .remove();
+    ;
+    return true;  
+}
+  
+
+update();
+</script>
+</body>
+</html>

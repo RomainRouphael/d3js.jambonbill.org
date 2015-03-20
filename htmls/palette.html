@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src='js/d3.min.js'></script>
+  <title>d3</title>
+
+</head>
+
+<body>
+
+<div class="container">
+
+      <hr />
+
+      <!-- Thumbnails -->
+
+      <div class="bs-docs-section">
+
+    <div class="row bs-examples">
+
+      <div class="col-xs-3 col-md-3"> <div class="pal color1"></div> <p>#eae4d4</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color2"></div> <p>#99958b</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color3"></div> <p>#4c4a45</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color4"></div> <p>#050607</p> </div>
+      
+      <div class="col-xs-3 col-md-3"> <div class="pal color5"></div> <p>#759353</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color6"></div> <p>#2266cc</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color7"></div> <p>#e84e1c</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color8"></div> <p>#be1721</p> </div>
+
+      <div class="col-xs-3 col-md-3"> <div class="pal color9"></div> <p>#a4b88e</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color10"></div> <p>#6ba5ce</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color11"></div> <p>#f08a69</p> </div>
+      <div class="col-xs-3 col-md-3"> <div class="pal color12"></div> <p>#d4666d</p> </div>
+
+      <div class="clearfix visible-xs"></div>
+
+    </div>
+
+  </div>
+
+<hr />
+
+<h1>D3Js color palette</h1>
+
+<a href=# onclick='category10()'>category10</a> - 
+<a href=# onclick='category20()'>category20</a> - 
+<a href=# onclick='category20b()'>category20b</a> - 
+<a href=# onclick='category20c()'>category20c</a> - 
+<a href=# onclick='custom()'>custom</a>
+
+<div id='more'></div>
+
+
+    </div><!-- /.container -->
+
+
+<script type="text/javascript">
+//var range = d3.scale.category10().range();
+function category10(){ showPalette( d3.scale.category10().range() ); }
+function category20(){ showPalette( d3.scale.category20().range() ); }
+function category20b(){ showPalette( d3.scale.category20b().range()); }
+function category20c(){ showPalette( d3.scale.category20c().range()); }
+function custom(){
+  var z=d3.scale.ordinal().domain(mnc).range(mnc);
+  var z=d3.scale.ordinal().range(mnc);
+  showPalette( z.range() );
+}
+function showPalette( range )
+{
+  
+  var html=[];
+  for(var i=0; i < range.length; i++){
+    var c = range[i];
+    //console.log(c);
+    html.push("<div class='col-xs-3 col-md-3'> <div class='pal' style='background-color:" + c + "'></div> <p><b>" + i + "</b> - " + c + "</p> </div>");
+  }
+  $("#more").html( html.join('') );
+}
+
+</script>
+
+
+
+</body>
+</html>
