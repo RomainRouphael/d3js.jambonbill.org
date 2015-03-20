@@ -40,40 +40,65 @@ body { padding-top: 70px; }
   <p><a class="btn btn-default btn-lg" href="#" role="button">kthxbye</a></p>
 </div>
 -->
-<h1>jambonbill d3js page</h1>
+
+<h2>a picture is worth a thousand words</h2>
+<hr />
 
 <div class="row" id='board'>
 
   <!-- template -->
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <a href='dataviz.php?id=33'><img src="img/template.png" alt="..."></a>
+      <a href='dataviz.php?id=33'><img src="img/template.png"></a>
       <div class="caption">
         <h3>Template</h3>
         <p>This is the jambonbill d3js template that Gist uses internally.</p>
-        <p><a href="#" class="btn btn-default" role="button">Let's see</a></p>
+        <i class='text-muted'>Tags : template</i>
       </div>
     </div>
   </div>
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <a href='dataviz.php?id=33'><img src="img/viz1.png" alt="..."></a>
+      <a href='dataviz.php?id=33'><img src="img/viz1.png"></a>
       <div class="caption">
         <h3>Thumbnail label</h3>
-        <p>Note: Don't name your files "gistfile" with a numerical suffix. This is the format of the automatic naming scheme that Gist uses internally.</p>
-        <p><a href="#" class="btn btn-default" role="button">Let's see</a></p>
+        <p>Another attempts at doing something pretty. I had to steal the picture tho</p>
+        <i class='text-muted'>Tags : Circle, gravity</i>
       </div>
     </div>
   </div>
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
-      <a href='dataviz.php?id=33'><img src="img/kuler-pulse.jpg" alt="..."></a>
+      <a href='dataviz.php?id=33'><img src="img/dashboard640x450.png"></a>
+      <div class="caption">
+        <h3>Student dashboard</h3>
+        <p>This is a test to see how high contrast thumbnails look on this landing page.</p>
+        <i class='text-muted'>Tags : #edx, #databits</i>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href='dataviz.php?id=33'><img src="img/binomial640x450.png"></a>
+      <div class="caption">
+        <h3>Binomial distribution</h3>
+        <p>This is a test to see how high contrast thumbnails look on this landing page.</p>
+        <i class='text-muted'>Tags : #binomial, #databits</i>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href='dataviz.php?id=33'><img src="img/kuler-pulse.jpg"></a>
       <div class="caption">
         <h3>Color shock</h3>
         <p>This is a test to see how high contrast thumbnails look on this landing page.</p>
-        <p><a href="#" class="btn btn-default" role="button">Ok</a></p>
+        <i class='text-muted'>Tags : #color, #shock</i>
       </div>
     </div>
   </div>
@@ -89,7 +114,7 @@ body { padding-top: 70px; }
           <a href="http://jambonbill.org">jambonbill.org</a>
     </div>
     <div class="col-md-6">
-      email : webmaster at partouze-cagoule.org
+      email : webmaster at partouze-cagoule.fr
     </div>
     <div class="col-md-2">
       <div class="copyright">copyleft</div>
