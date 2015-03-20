@@ -23,7 +23,7 @@ body { padding-top: 70px; }
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">d3js.jambonbill.org</a>
+      <a class="navbar-brand" href="index.php">d3js.jambonbill.org</a>
     </div>
   </div><!-- /.container-fluid -->
 </nav>

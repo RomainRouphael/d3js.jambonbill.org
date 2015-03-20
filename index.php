@@ -25,7 +25,7 @@ body { padding-top: 70px; }
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#">d3js.jambonbill.org</a>
+      <a class="navbar-brand" href="index.php">d3js.jambonbill.org</a>
     </div>
   </div><!-- /.container-fluid -->
 </nav>
@@ -41,9 +41,20 @@ body { padding-top: 70px; }
 </div>
 -->
 <h1>jambonbill d3js page</h1>
-<hr />
 
 <div class="row" id='board'>
+
+  <!-- template -->
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href='dataviz.php?id=33'><img src="img/template.png" alt="..."></a>
+      <div class="caption">
+        <h3>Template</h3>
+        <p>This is the jambonbill d3js template that Gist uses internally.</p>
+        <p><a href="#" class="btn btn-default" role="button">Let's see</a></p>
+      </div>
+    </div>
+  </div>
 
   <div class="col-sm-6 col-md-4">
     <div class="thumbnail">
@@ -56,16 +67,29 @@ body { padding-top: 70px; }
     </div>
   </div>
 
+  <div class="col-sm-6 col-md-4">
+    <div class="thumbnail">
+      <a href='dataviz.php?id=33'><img src="img/kuler-pulse.jpg" alt="..."></a>
+      <div class="caption">
+        <h3>Color shock</h3>
+        <p>This is a test to see how high contrast thumbnails look on this landing page.</p>
+        <p><a href="#" class="btn btn-default" role="button">Ok</a></p>
+      </div>
+    </div>
+  </div>
+
+
 </div>
 
 <hr />
 <!-- footer with some links --> 
 <div class="container">
     <div class="menu-wrapper col-md-4">
-          <a href="/about">Footer</a>
+          <a href="http://jambonbill.org">jambonbill.org</a>
+          <a href="http://jambonbill.org">jambonbill.org</a>
     </div>
     <div class="col-md-6">
-      Nope
+      email : webmaster at partouze-cagoule.org
     </div>
     <div class="col-md-2">
       <div class="copyright">copyleft</div>
